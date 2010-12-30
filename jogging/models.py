@@ -20,7 +20,7 @@ class Log(models.Model):
             return u'%s ...' % self.msg[:maxlen]
         return self.msg
     abbrev_msg.short_description = u'abbreviated msg'
-    
+
     class Meta:
         get_latest_by = 'datetime'
 
@@ -42,8 +42,11 @@ def jogging_init():
             else:
                 logger.addHandler(handler)
 
-    if hasattr(settings, 'LOGGING') and settings.LOGGING:
-        for module, properties in settings.LOGGING.items():
+
+    LOGGING = getattr(settings, 'JOGGING', getattr(settings, 'LOGGING', None))
+
+    if LOGGING:
+        for module, properties in LOGGING.items():
             logger = py_logging.getLogger(module)
 
             if 'level' in properties:
@@ -60,7 +63,7 @@ def jogging_init():
                     "A logger in settings.LOGGING doesn't have its log level set. " +
                     "Either set a level on that logger, or set GLOBAL_LOG_LEVEL.")
 
-            handlers = [] 
+            handlers = []
             if 'handler' in properties:
                 handlers = [properties['handler']]
             elif 'handlers' in properties:
