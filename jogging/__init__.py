@@ -1,7 +1,7 @@
 import logging as py_logging
 import sys
 
-VERSION = (0, 2, 2)
+VERSION = (0, 2, 3)
 
 class LoggingWrapper(object):
     LOGGING_LEVELS = {
