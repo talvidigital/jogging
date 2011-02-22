@@ -82,10 +82,10 @@ Request:
         from django.conf import settings
         
         chunks = source.split('.')
-        modules = ['.'.join(chunks[0:n]) for n in range(1, len(chunks) + 1)]
+        modules = ['default'] + ['.'.join(chunks[0:n]) for n in range(1, len(chunks) + 1)]
         modules.reverse()
         
-        if hasattr(settings, 'LOGGING'):
+        if hasattr(settings, 'JOGGING'):
             for source in modules:
                 if source in settings.LOGGING:
                     return py_logging.getLogger(source)
