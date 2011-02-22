@@ -87,7 +87,7 @@ Request:
         
         if hasattr(settings, 'JOGGING'):
             for source in modules:
-                if source in settings.LOGGING:
+                if source in settings.JOGGING:
                     return py_logging.getLogger(source)
         
         return py_logging.getLogger('') # root logger
